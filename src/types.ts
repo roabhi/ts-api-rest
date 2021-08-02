@@ -10,3 +10,7 @@ export interface City {
     province:string,
     timezone:string
 }
+
+export interface Cities {
+    cities:City[]
+}
