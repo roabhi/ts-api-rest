@@ -5,6 +5,13 @@ import {getResults, getIanaCode} from './database';
 export default function createServer(){
     const app = express();
 
+    app.set('port', (process.env.PORT || 3000));
+
+    app.get('/', (req, res)  => {
+        const result = 'App is running'
+        res.send(result);
+    });
+
     app.get('/cities/:name', (req, res) => {
 
         try{

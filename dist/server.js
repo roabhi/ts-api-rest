@@ -7,6 +7,11 @@ var express_1 = __importDefault(require("express"));
 var database_1 = require("./database");
 function createServer() {
     var app = express_1.default();
+    app.set('port', (process.env.PORT || 3000));
+    app.get('/', function (req, res) {
+        var result = 'App is running';
+        res.send(result);
+    });
     app.get('/cities/:name', function (req, res) {
         try {
             var data = database_1.getResults(req.params.name);
