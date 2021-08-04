@@ -6,14 +6,27 @@ const cities:Cities = require('../data/citymap.json');
 export function getResults(name:string):City[] {
     
 
-    const _results = cities.cities.filter(__c => __c.city === name);
+    const _results = cities.cities.filter(__c => __c.city.toLowerCase() === name.toLowerCase());
 
     if(!_results || !_results.length ){
-        throw new Error('no match')
+        throw new Error('no city found in db, try a more populated city nearby');
     }
 
     return _results;
 
  
     
+}
+
+export function getIanaCode(name:string, country:string):City {
+
+    const _result = cities.cities.find(__c =>  __c.city.toLowerCase() === name.toLowerCase() && __c.country.toLowerCase() === country.toLowerCase());      
+
+
+    if(!_result){
+        throw new Error(`No iana code found for ${name}, ${country}`);
+    }
+
+    return _result;
+
 }
