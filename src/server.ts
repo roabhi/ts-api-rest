@@ -1,11 +1,22 @@
+import cors from 'cors';
 import express from 'express';
+
 
 import {getResults, getIanaCode} from './database';
 
 export default function createServer(){
     const app = express();
 
-    app.set('port', (process.env.PORT || 3000));
+    const allowedOrigins = ['http://localhost:5000', 'http://localhost:3000'];
+
+    const options: cors.CorsOptions = {
+    origin: allowedOrigins
+    };
+
+
+    app.use(cors(options));
+
+    app.set('port', (process.env.PORT || 3001));
 
     app.get('/', (req, res)  => {
         const result = 'App is running'
