@@ -2,7 +2,7 @@ import cors from 'cors';
 import express from 'express';
 
 
-import {getResults, getIanaCode} from './database';
+import {getResults, getIanaCode, getIanaCodeByIso} from './database';
 
 export default function createServer(){
     const app = express();
@@ -42,6 +42,24 @@ export default function createServer(){
         try{
 
             const data = getIanaCode(req.params.name, req.params.country);
+            res.json({
+                "iana_code" : data.timezone
+            });
+
+        }catch (e) {
+            res.status(400).json({
+                error:e.message
+            });
+        }
+
+
+    });
+
+    app.get('/cities/iana-iso/:name/:iso', (req, res) => {
+        
+        try{
+
+            const data = getIanaCodeByIso(req.params.name, req.params.iso);
             res.json({
                 "iana_code" : data.timezone
             });

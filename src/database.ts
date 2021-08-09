@@ -30,3 +30,16 @@ export function getIanaCode(name:string, country:string):City {
     return _result;
 
 }
+
+export function getIanaCodeByIso(name:string, iso_code:string):City {
+
+    const _result = cities.cities.find(__c =>  __c.city.toLowerCase() === name.toLowerCase() && __c.iso2 === iso_code);      
+
+
+    if(!_result){
+        throw new Error(`No iana code found for ${name}, ${iso_code}`);
+    }
+
+    return _result;
+
+}

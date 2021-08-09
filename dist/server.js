@@ -43,6 +43,19 @@ function createServer() {
             });
         }
     });
+    app.get('/cities/iana-iso/:name/:iso', function (req, res) {
+        try {
+            var data = database_1.getIanaCodeByIso(req.params.name, req.params.iso);
+            res.json({
+                "iana_code": data.timezone
+            });
+        }
+        catch (e) {
+            res.status(400).json({
+                error: e.message
+            });
+        }
+    });
     return app;
 }
 exports.default = createServer;
