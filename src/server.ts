@@ -7,6 +7,7 @@ import {getResults, getIanaCode, getIanaCodeByIso} from './database';
 export default function createServer(){
     const app = express();
 
+    //Allow CORS connecton from following
     const allowedOrigins = ['http://localhost:5000', 'http://localhost:3000', 'http://localhost:1234'];
 
     const options: cors.CorsOptions = {
